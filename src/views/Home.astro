@@ -7,6 +7,7 @@ import Photo from '../components/Photo.astro';
 import Marquee from '../components/Marquee.astro';
 import Faq from '../components/Faq.astro';
 import Playlist from '../components/Playlist.astro';
+import Podcast from '../components/Podcast.astro';
 import PolynesiaMap from '../components/PolynesiaMap.astro';
 import CodeTicket from '../components/CodeTicket.astro';
 import BuyButton from '../components/BuyButton.astro';
@@ -186,6 +187,8 @@ const whyLinks = lang === 'en'
       </div>
     </div>
   </section>
+
+  <Podcast />
 
   <section class="wrap section about">
     <Photo alt={C.aboutPhoto} />

@@ -35,3 +35,6 @@ export const HERO_VIDEO = '/videos/hero.mp4';
 
 // Deine Spotify Playlist (Link aus Spotify: Teilen > Link zur Playlist kopieren). Leer = Platzhalter.
 export const SPOTIFY_PLAYLIST = '';
+
+// Deine Podcast Folge mit Wayfinders (Link von Spotify oder Apple Podcasts). Leer = Platzhalter.
+export const PODCAST_EPISODE = '';
