@@ -5,7 +5,7 @@ export const SITE = {
     de: 'Als Au-pair nach Tahiti ohne Agentur oder Volunteering in Hawaii: ehrliche Infos aus erster Hand, Vorlagen und ein Guide, der dir die Fragen beantwortet, die ich ständig in den DMs bekomme.',
     en: 'Au pair in Tahiti without an agency or volunteering in Hawaii: honest first hand info, templates and a guide that answers the questions I get in my DMs every day.',
   },
-  author: 'Elisa',
+  author: 'Elisaveta',
   // Dein Worldpackers Code und Link (Platzhalter, bitte ersetzen)
   worldpackersCode: 'DEINCODE',
   worldpackersLink: 'https://www.worldpackers.com/',
