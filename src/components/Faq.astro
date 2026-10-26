@@ -1,0 +1,50 @@
+---
+// Aufklappbares FAQ wie bei Google ("Ähnliche Fragen"). Die gesperrte Frage zeigt einen verschwommenen Ausschnitt und führt zum Guide.
+import { FAQ } from '../faq';
+import { UI, langFromPath } from '../i18n';
+const lang = langFromPath(Astro.url.pathname);
+const t = UI[lang];
+const items = FAQ[lang];
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: items.filter((i) => !i.locked).map((i) => ({
+    '@type': 'Question',
+    name: i.q,
+    acceptedAnswer: { '@type': 'Answer', text: i.a },
+  })),
+};
+---
+<div class="faq">
+  {items.map((item) => (
+    <details class={item.locked ? 'faq-item locked' : 'faq-item'}>
+      <summary>
+        <span>{item.q}</span>
+        {item.locked ? (
+          <svg class="faq-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="1.5" /><path d="M8 11V8a4 4 0 0 1 8 0v3" /></svg>
+        ) : (
+          <svg class="faq-icon chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" /></svg>
+        )}
+      </summary>
+      {item.locked ? (
+        <div class="faq-answer">
+          <div class="blurred" aria-hidden="true">
+            <p>{item.a} {item.a} {item.a}</p>
+            <p>{item.a}</p>
+          </div>
+          <div class="paywall">
+            <p>{t.lockedText}</p>
+            <a class="btn" href={lang === 'en' ? '/en/guide/' : '/guide/'}>{t.lockedBtn}</a>
+          </div>
+        </div>
+      ) : (
+        <div class="faq-answer">
+          <p>{item.a}</p>
+          {item.todo && <div class="todo">{item.todo}</div>}
+          {item.check && <div class="check">{item.check}</div>}
+        </div>
+      )}
+    </details>
+  ))}
+</div>
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

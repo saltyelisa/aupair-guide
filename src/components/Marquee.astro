@@ -5,8 +5,8 @@ const items = {
   en: ['Find a host family', 'Visa and entry', 'Insurance', 'Worldpackers', 'Costs', 'Message templates', 'Meet people', 'Plan B'],
 }[langFromPath(Astro.url.pathname)];
 ---
-<div class="marquee" aria-hidden="true">
-  <div class="marquee-track">
-    {[...items, ...items].map((item) => <span>{item} <b>✦</b></span>)}
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    {[...items, ...items].map((item) => <span>{item}<i>·</i></span>)}
   </div>
 </div>

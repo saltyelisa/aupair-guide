@@ -3,8 +3,8 @@
 // Aus Datenschutzgründen (DSGVO) wird das Video erst nach einem Klick geladen.
 import { UI, langFromPath } from '../i18n';
 const t = UI[langFromPath(Astro.url.pathname)];
-interface Props { url: string; caption: string; tilt?: number }
-const { url, caption, tilt = 0 } = Astro.props;
+interface Props { url: string; caption: string }
+const { url, caption } = Astro.props;
 
 const isPlaceholder = url.includes('DEINNAME');
 const tiktokId = url.match(/tiktok\.com\/.*\/video\/(\d+)/)?.[1];
@@ -16,14 +16,14 @@ const src = tiktokId
     ? `https://www.instagram.com/reel/${instaCode}/embed`
     : '';
 ---
-<figure class="phone" style={`--tilt:${tilt}deg`}>
+<figure class="phone">
   <div class="phone-screen" data-embed={isPlaceholder ? undefined : src}>
     <div class="phone-cover">
       <span class="phone-platform">{platform}</span>
       {isPlaceholder ? (
         <span class="phone-hint">{t.videoHint}</span>
       ) : (
-        <button class="play" type="button" aria-label={`${t.play}: ${caption}`}>▶</button>
+        <button class="play" type="button" aria-label={`${t.play}: ${caption}`}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg></button>
       )}
       <span class="phone-caption">{caption}</span>
     </div>

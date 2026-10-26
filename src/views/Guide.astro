@@ -6,23 +6,35 @@ import { SITE } from '../config';
 import { UI, langFromPath } from '../i18n';
 
 const lang = langFromPath(Astro.url.pathname);
-const t = UI[lang];
+const t = UI[lang]; void t;
 const C = {
   de: {
     title: 'Der Guide',
     description: 'Der komplette Guide für Au-pair in Tahiti ohne Agentur und Volunteering in Hawaii, mit Vorlagen für Profil und Nachrichten an Familien.',
     kicker: 'Der komplette Guide',
-    h1: 'Alles für Tahiti und Hawaii an einem Ort',
+    h1: 'Alles für Tahiti und Hawaii, <em>Schritt für Schritt</em>',
     intro: 'Der Blog gibt dir den Überblick. Im Guide bekommst du die Schritt für Schritt Anleitung, meine Vorlagen und alles, was ich mir selbst am Anfang gewünscht hätte.',
     insideKicker: 'Was drin ist',
-    insideTitle: 'Sechs Kapitel, null Agentur',
+    insideTitle: 'Sechs Kapitel, <em>null Agentur</em>',
+    compareTitle: 'Was gratis ist <em>und was im Guide steht</em>',
+    freeHead: 'Gratis im Blog',
+    paidHead: 'Im Guide',
+    compare: [
+      ['Dass es ohne Agentur geht und wie es grob abläuft', 'Der genaue Ablauf von der ersten Suche bis zum Flug, mit Zeitplan'],
+      ['Wo Familien ungefähr suchen', 'Die konkreten Gruppen und Plattformen, die bei mir funktioniert haben'],
+      ['Tipps für die erste Nachricht', 'Fertige Vorlagen für Profil und Nachrichten auf Französisch, Englisch und Deutsch'],
+      ['Was du für Einreise und Versicherung beachten musst', 'Checklisten mit Links zu den offiziellen Stellen, plus welche Versicherung ich hatte'],
+      ['Grobe Kosten', 'Meine echte Kostenaufstellung und eine Vorlage für dein Budget'],
+      ['Dass ein Familienwechsel okay ist', 'Ein Plan B mit konkreten Schritten und den Fragen, die du der Familie vorher stellen solltest'],
+    ],
+    compareTodo: 'Diese Aufteilung ist ein Vorschlag. Schau, ob sie zu dem passt, was du wirklich hergeben willst.',
     features: [
-      ['🏡', 'Familie finden', 'Wo Familien in Tahiti wirklich suchen, welche Gruppen sich lohnen und wie du auffällst.'],
-      ['💌', 'Vorlagen zum Kopieren', 'Fertige Texte für dein Profil und für die erste Nachricht an Familien und Hosts, auf Deutsch, Englisch und Französisch.'],
-      ['🛂', 'Visum und Einreise', 'Was du für Französisch-Polynesien und die USA brauchst, mit Links zu den offiziellen Quellen.'],
-      ['🩹', 'Versicherung und Kosten', 'Welche Versicherung passt und was du realistisch einplanen solltest.'],
-      ['🥥', 'Leute kennenlernen', 'Wie du vor Ort schnell Anschluss findest, damit du nicht nur mit der Familie Zeit verbringst.'],
-      ['🧭', 'Plan B', 'Was du tun kannst, wenn es mit der Familie oder dem Host nicht passt.'],
+      ['', 'Familie finden', 'Wo Familien in Tahiti wirklich suchen, welche Gruppen sich lohnen und wie du auffällst.'],
+      ['', 'Vorlagen zum Kopieren', 'Fertige Texte für dein Profil und für die erste Nachricht an Familien und Hosts, auf Deutsch, Englisch und Französisch.'],
+      ['', 'Visum und Einreise', 'Was du für Französisch-Polynesien und die USA brauchst, mit Links zu den offiziellen Quellen.'],
+      ['', 'Versicherung und Kosten', 'Welche Versicherung passt und was du realistisch einplanen solltest.'],
+      ['', 'Leute kennenlernen', 'Wie du vor Ort schnell Anschluss findest, damit du nicht nur mit der Familie Zeit verbringst.'],
+      ['', 'Plan B', 'Was du tun kannst, wenn es mit der Familie oder dem Host nicht passt.'],
     ],
     formatTodo: 'Das Format ist noch offen: Online Guide mit Login, Notion Seite, E-Book oder PDF. Die Seite funktioniert mit allem, du musst nur den Kauf Link in src/config.ts eintragen.',
     faqKicker: 'Noch Fragen?',
@@ -38,17 +50,29 @@ const C = {
     title: 'The Guide',
     description: 'The complete guide to being an au pair in Tahiti without an agency and volunteering in Hawaii, with templates for your profile and messages to families.',
     kicker: 'The complete guide',
-    h1: 'Everything for Tahiti and Hawaii in one place',
+    h1: 'Everything for Tahiti and Hawaii, <em>step by step</em>',
     intro: "The blog gives you the overview. The guide gives you the step by step plan, my templates and everything I wish I'd had when I started.",
     insideKicker: "What's inside",
-    insideTitle: 'Six chapters, zero agency',
+    insideTitle: 'Six chapters, <em>zero agency</em>',
+    compareTitle: 'What is free <em>and what is in the guide</em>',
+    freeHead: 'Free on the blog',
+    paidHead: 'In the guide',
+    compare: [
+      ['That it works without an agency and roughly how', 'The exact process from first search to flight, with a timeline'],
+      ['Roughly where families search', 'The specific groups and platforms that worked for me'],
+      ['Tips for your first message', 'Ready made templates for profile and messages in French, English and German'],
+      ['What to watch for with entry and insurance', 'Checklists with links to the official sources, plus the insurance I had'],
+      ['Rough costs', 'My real cost breakdown and a budget template'],
+      ['That switching families is okay', 'A plan B with concrete steps and the questions to ask a family beforehand'],
+    ],
+    compareTodo: 'This split is a suggestion. Check it matches what you actually want to give away.',
     features: [
-      ['🏡', 'Find a family', 'Where families in Tahiti actually look, which groups are worth it and how to stand out.'],
-      ['💌', 'Templates to copy', 'Ready made texts for your profile and your first message to families and hosts, in English, German and French.'],
-      ['🛂', 'Visa and entry', 'What you need for French Polynesia and the US, with links to the official sources.'],
-      ['🩹', 'Insurance and costs', 'Which insurance fits and what you should realistically budget.'],
-      ['🥥', 'Meet people', "How to make friends fast so you're not only spending time with your family."],
-      ['🧭', 'Plan B', "What to do if things don't work out with your family or host."],
+      ['', 'Find a family', 'Where families in Tahiti actually look, which groups are worth it and how to stand out.'],
+      ['', 'Templates to copy', 'Ready made texts for your profile and your first message to families and hosts, in English, German and French.'],
+      ['', 'Visa and entry', 'What you need for French Polynesia and the US, with links to the official sources.'],
+      ['', 'Insurance and costs', 'Which insurance fits and what you should realistically budget.'],
+      ['', 'Meet people', "How to make friends fast so you're not only spending time with your family."],
+      ['', 'Plan B', "What to do if things don't work out with your family or host."],
     ],
     formatTodo: 'The format is still open: online guide with login, Notion page, e-book or PDF. The page works with all of them, just add the buy link in src/config.ts.',
     faqKicker: 'Any questions?',
@@ -67,31 +91,50 @@ const C = {
     <p>{C.intro}</p>
     <div class="actions">
       <BuyButton />
-      <span class="sticker sticker-yellow">{t.only} {SITE.price}</span>
+      <span class="price-tag">{SITE.price}</span>
     </div>
   </PageHero>
 
   <section class="wrap section">
-    <p class="kicker">{C.insideKicker}</p>
-    <h2 class="big">{C.insideTitle}</h2>
-    <div class="feature-grid">
-      {C.features.map(([emoji, title, text]) => (
-        <div class="feature reveal">
-          <span class="feature-emoji" aria-hidden="true">{emoji}</span>
+    <p class="label">{C.insideKicker}</p>
+    <h2 class="section-title" set:html={C.insideTitle} />
+    <ol class="chapters">
+      {C.features.map(([, title, text], i) => (
+        <li>
+          <span class="destination-no">{String(i + 1).padStart(2, '0')}</span>
           <h3>{title}</h3>
           <p>{text}</p>
-        </div>
+        </li>
       ))}
-    </div>
+    </ol>
     <div class="todo">{C.formatTodo}</div>
   </section>
 
-  <section class="wrap section faq">
-    <p class="kicker">{C.faqKicker}</p>
-    <h2 class="big">{C.faqTitle}</h2>
-    <details><summary>{C.q1}</summary><p>{C.a1}</p></details>
-    <details><summary>{C.q2}</summary><div class="todo">{C.a2Todo}</div></details>
-    <details><summary>{C.q3}</summary><p>{C.a3}</p></details>
+  <section class="wrap section">
+    <h2 class="section-title" set:html={C.compareTitle} />
+    <div class="compare" role="table">
+      <div class="compare-row compare-head" role="row">
+        <span role="columnheader">{C.freeHead}</span>
+        <span role="columnheader">{C.paidHead}</span>
+      </div>
+      {C.compare.map(([free, paid]) => (
+        <div class="compare-row" role="row">
+          <span role="cell">{free}</span>
+          <span role="cell">{paid}</span>
+        </div>
+      ))}
+    </div>
+    <div class="todo">{C.compareTodo}</div>
+  </section>
+
+  <section class="wrap section">
+    <p class="label">{C.faqKicker}</p>
+    <h2 class="section-title">{C.faqTitle}</h2>
+    <div class="faq">
+    <details class="faq-item"><summary><span>{C.q1}</span><svg class="faq-icon chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" /></svg></summary><div class="faq-answer"><p>{C.a1}</p></div></details>
+    <details class="faq-item"><summary><span>{C.q2}</span><svg class="faq-icon chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" /></svg></summary><div class="faq-answer"><div class="todo">{C.a2Todo}</div></div></details>
+    <details class="faq-item"><summary><span>{C.q3}</span><svg class="faq-icon chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" /></svg></summary><div class="faq-answer"><p>{C.a3}</p></div></details>
+    </div>
     <div class="actions"><BuyButton /></div>
   </section>
 </Base>

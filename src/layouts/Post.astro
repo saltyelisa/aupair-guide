@@ -9,7 +9,6 @@ const t = UI[lang];
 
 const { frontmatter } = Astro.props;
 const date = new Date(frontmatter.date);
-const emoji: Record<string, string> = { Tahiti: '🌺', Hawaii: '🌋' };
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
@@ -22,7 +21,7 @@ const jsonLd = {
 ---
 <Base title={frontmatter.title} description={frontmatter.description} type="article">
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
-  <PageHero kicker={`${emoji[frontmatter.tag] ?? '🌴'} ${frontmatter.tag}`} title={frontmatter.title}>
+  <PageHero kicker={frontmatter.tag} title={frontmatter.title}>
     <p class="meta">
       {t.by} {SITE.author} · <time datetime={date.toISOString()}>{date.toLocaleDateString(t.dateLocale, { day: 'numeric', month: 'long', year: 'numeric' })}</time>
     </p>

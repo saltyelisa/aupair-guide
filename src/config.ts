@@ -1,6 +1,7 @@
 // Alles, was du öfter ändern willst, steht hier an einem Ort.
 export const SITE = {
-  name: 'Salty Au-pair Guide',
+  // Arbeitstitel, noch nicht final entschieden
+  name: 'The Pacific Gap',
   description: {
     de: 'Als Au-pair nach Tahiti ohne Agentur oder Volunteering in Hawaii: ehrliche Infos aus erster Hand, Vorlagen und ein Guide, der dir die Fragen beantwortet, die ich ständig in den DMs bekomme.',
     en: 'Au pair in Tahiti without an agency or volunteering in Hawaii: honest first hand info, templates and a guide that answers the questions I get in my DMs every day.',

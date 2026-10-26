@@ -1,6 +1,6 @@
 ---
-interface Props { limit?: number }
 import { UI, langFromPath } from '../i18n';
+interface Props { limit?: number }
 const { limit } = Astro.props;
 const lang = langFromPath(Astro.url.pathname);
 const t = UI[lang];
@@ -10,16 +10,16 @@ const posts = modules
   .map((m) => ({ ...m.frontmatter, url: m.url }))
   .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
   .slice(0, limit);
-const emoji: Record<string, string> = { Tahiti: '🌺', Hawaii: '🌋' };
 ---
-<div class="post-grid">
+<ol class="post-list">
   {posts.map((post) => (
-    <a class={`post-card theme-${post.tag?.toLowerCase()}`} href={post.url + '/'}>
-      <span class="post-card-emoji" aria-hidden="true">{emoji[post.tag] ?? '🌴'}</span>
-      <span class="chip">{post.tag}</span>
-      <h3>{post.title}</h3>
-      <p>{post.description}</p>
-      <span class="post-card-more">{t.readMore}</span>
-    </a>
+    <li>
+      <a href={post.url + '/'}>
+        <span class="label">{post.tag}</span>
+        <span class="post-list-title">{post.title}</span>
+        <span class="post-list-desc">{post.description}</span>
+        <span class="post-list-more">{t.readMore}</span>
+      </a>
+    </li>
   ))}
-</div>
+</ol>

@@ -3,7 +3,9 @@ import Base from '../layouts/Base.astro';
 import PostList from '../components/PostList.astro';
 import VideoEmbed from '../components/VideoEmbed.astro';
 import Reel from '../components/Reel.astro';
+import Photo from '../components/Photo.astro';
 import Marquee from '../components/Marquee.astro';
+import Faq from '../components/Faq.astro';
 import CodeTicket from '../components/CodeTicket.astro';
 import BuyButton from '../components/BuyButton.astro';
 import { SITE, VIDEOS, HERO_VIDEO } from '../config';
@@ -11,172 +13,172 @@ import { langFromPath } from '../i18n';
 
 const lang = langFromPath(Astro.url.pathname);
 const p = lang === 'en' ? '/en' : '';
-const tilts = [-3, 2, -1.5, 3];
 const C = {
   de: {
-    sticker: 'ohne Agentur ✌️',
-    h1: 'Tahiti. Hawaii.<br /><em>Einfach machen.</em>',
-    lead: `Ich bin ${SITE.author} und war als Au-pair auf Tahiti und als Volunteer auf Hawaii, ganz ohne Agentur. Hier verrate ich dir, wie du das auch schaffst.`,
+    label: 'Au-pair Tahiti · Volunteering Hawaii',
+    h1: 'Ein Jahr im Pazifik. <em>Ohne Agentur.</em>',
+    lead: `Ich bin ${SITE.author}. Ich war als Au-pair auf Tahiti und als Volunteer auf Hawaii, beide Male ohne Agentur. Hier schreibe ich alles auf, was ich vorher gerne gewusst hätte.`,
     toGuide: 'Zum Guide',
-    watch: 'Videos anschauen ▶',
-    psst: 'psst, ganz vieles davon ist gratis ↓',
-    reel: 'Dein Tahiti Clip',
-    where: "Wohin soll's gehen?",
-    twoIslands: 'Zwei Inseln, zwei Wege',
-    tahitiChip: 'Au-pair',
+    watch: 'Erstmal gratis lesen',
+    heroMedia: 'Dein Lieblingsfoto oder Clip',
+    heroCaption: 'Tahiti, Französisch-Polynesien',
+    whereTitle: 'Zwei Inseln, <em>zwei Wege</em>',
+    tahitiTitle: 'Au-pair auf Tahiti',
     tahitiText: 'Gastfamilie ohne Agentur finden, Einreise, Versicherung und was das Leben in Französisch-Polynesien wirklich kostet.',
+    tahitiPhoto: 'Foto aus Tahiti',
+    hawaiiTitle: 'Volunteering auf Hawaii',
     hawaiiText: 'Mit Worldpackers gratis wohnen, die richtigen Hosts finden und mit meinem Code bei der Mitgliedschaft sparen.',
-    freeRead: 'Gratis lesen →',
-    videosKicker: 'Lieber schauen statt lesen?',
-    videosTitle: 'Direkt von meinem TikTok und Insta',
+    hawaiiPhoto: 'Foto aus Hawaii',
+    read: 'Artikel lesen',
+    faqLabel: 'Häufige Fragen',
+    faqTitle: 'Was ich jeden Tag <em>in meinen DMs</em> lese',
+    videosLabel: 'TikTok und Instagram',
+    videosTitle: 'Lieber schauen <em>statt lesen?</em>',
     moreTiktok: 'Mehr auf TikTok',
-    followInsta: 'Folg mir auf Instagram',
-    thatsMe: 'das bin ich!',
-    hi: `Hi, ich bin ${SITE.author}`,
-    aboutTitle: 'Ich bekomm die gleichen Fragen jeden Tag',
-    aboutText: 'Wie hast du die Familie gefunden? Brauch ich ein Visum? Was kostet das? Statt jede DM einzeln zu beantworten, hab ich alles hier gesammelt.',
-    aboutTodo: 'Ein paar Sätze über dich: Gap Year 2024/25, zweiter Aufenthalt 2026, was dich am meisten überrascht hat. Und ein echtes Foto statt dem Kamera Emoji.',
-    guideKicker: 'Der komplette Guide',
-    guideTitle: 'Alles Schritt für Schritt, mit Vorlagen zum Kopieren',
-    guideText: 'Profiltexte, erste Nachrichten an Familien auf Französisch und Englisch, Checklisten für Einreise und Versicherung und ein Plan B, falls es nicht passt.',
+    followInsta: 'Instagram',
+    aboutLabel: 'Über mich',
+    aboutTitle: `Hi, ich bin <em>${SITE.author}</em>`,
+    aboutPhoto: 'Foto von dir',
+    aboutText: 'Mein Gap Year hat mich nach Tahiti und Hawaii gebracht, und seitdem bekomme ich jeden Tag die gleichen Fragen. Statt jede DM einzeln zu beantworten, sammle ich hier alles an einem Ort.',
+    aboutTodo: 'Ein paar Sätze in deinen eigenen Worten: Gap Year 2024/25, zweiter Aufenthalt 2026, was dich am meisten überrascht hat.',
+    guideLabel: 'Der Guide',
+    guideTitle: 'Der Blog sagt dir, <em>dass</em> es geht. Der Guide zeigt dir, <em>wie</em>.',
+    guideText: 'Meine Vorlagen für Profil und erste Nachricht, die Gruppen, in denen ich gesucht habe, eine echte Kostenaufstellung, Checklisten für Einreise und Versicherung und ein Plan B, falls es nicht passt.',
     whatsInside: 'Was drin ist',
-    blogKicker: 'Gratis im Blog',
-    blogTitle: 'Neu für dich',
+    blogLabel: 'Blog',
+    blogTitle: 'Neu im <em>Blog</em>',
   },
   en: {
-    sticker: 'no agency ✌️',
-    h1: 'Tahiti. Hawaii.<br /><em>Just go.</em>',
-    lead: `I'm ${SITE.author}. I was an au pair in Tahiti and a volunteer in Hawaii, without any agency. Here I'll show you how you can do it too.`,
+    label: 'Au pair Tahiti · Volunteering Hawaii',
+    h1: 'A year in the Pacific. <em>No agency.</em>',
+    lead: `I'm ${SITE.author}. I was an au pair in Tahiti and a volunteer in Hawaii, both times without an agency. Here I write down everything I wish I'd known before.`,
     toGuide: 'Get the guide',
-    watch: 'Watch videos ▶',
-    psst: 'psst, lots of it is free ↓',
-    reel: 'Your Tahiti clip',
-    where: 'Where are you headed?',
-    twoIslands: 'Two islands, two ways',
-    tahitiChip: 'Au pair',
+    watch: 'Read for free first',
+    heroMedia: 'Your favourite photo or clip',
+    heroCaption: 'Tahiti, French Polynesia',
+    whereTitle: 'Two islands, <em>two ways</em>',
+    tahitiTitle: 'Au pair in Tahiti',
     tahitiText: 'Find a host family without an agency, sort out entry and insurance, and see what life in French Polynesia really costs.',
+    tahitiPhoto: 'Photo from Tahiti',
+    hawaiiTitle: 'Volunteering in Hawaii',
     hawaiiText: 'Stay for free with Worldpackers, find the right hosts and save on your membership with my code.',
-    freeRead: 'Read for free →',
-    videosKicker: 'Rather watch than read?',
-    videosTitle: 'Straight from my TikTok and Insta',
+    hawaiiPhoto: 'Photo from Hawaii',
+    read: 'Read the article',
+    faqLabel: 'FAQ',
+    faqTitle: 'What I read <em>in my DMs</em> every day',
+    videosLabel: 'TikTok and Instagram',
+    videosTitle: 'Rather watch <em>than read?</em>',
     moreTiktok: 'More on TikTok',
-    followInsta: 'Follow me on Instagram',
-    thatsMe: "that's me!",
-    hi: `Hi, I'm ${SITE.author}`,
-    aboutTitle: 'I get the same questions every day',
-    aboutText: 'How did you find your family? Do I need a visa? How much does it cost? Instead of answering every DM one by one, I put it all here.',
-    aboutTodo: 'A few sentences about you in English. And a real photo instead of the camera emoji.',
-    guideKicker: 'The complete guide',
-    guideTitle: 'Everything step by step, with templates to copy',
-    guideText: 'Profile texts, first messages to families in French and English, checklists for entry and insurance, and a plan B in case it does not work out.',
+    followInsta: 'Instagram',
+    aboutLabel: 'About me',
+    aboutTitle: `Hi, I'm <em>${SITE.author}</em>`,
+    aboutPhoto: 'Photo of you',
+    aboutText: 'My gap year took me to Tahiti and Hawaii, and ever since I get the same questions every day. Instead of answering every DM one by one, I collect everything here.',
+    aboutTodo: 'A few sentences in your own words, in English.',
+    guideLabel: 'The guide',
+    guideTitle: 'The blog tells you <em>that</em> it works. The guide shows you <em>how</em>.',
+    guideText: 'My templates for your profile and first message, the groups where I searched, a real cost breakdown, checklists for entry and insurance, and a plan B in case it does not work out.',
     whatsInside: "What's inside",
-    blogKicker: 'Free on the blog',
-    blogTitle: 'New for you',
+    blogLabel: 'Blog',
+    blogTitle: 'New on the <em>blog</em>',
   },
 }[lang];
 const tahitiPost = lang === 'en' ? '/en/blog/au-pair-tahiti-without-agency/' : '/blog/au-pair-tahiti-ohne-agentur/';
 const hawaiiPost = `${p}/blog/volunteering-hawaii-worldpackers/`;
 ---
 <Base>
-  <section class="hero">
-    <div class="hero-sun" aria-hidden="true"></div>
-    <div class="wrap hero-grid">
-      <div class="hero-text">
-        <span class="sticker sticker-pink">{C.sticker}</span>
-        <h1 set:html={C.h1} />
-        <p class="lead">{C.lead}</p>
-        <div class="actions">
-          <a class="btn btn-hot" href={`${p}/guide/`}>{C.toGuide}</a>
-          <a class="btn btn-ghost" href="#videos">{C.watch}</a>
-        </div>
-        <p class="hand hero-hand">{C.psst}</p>
-      </div>
-      <div class="hero-visual">
-        <div class="hero-phone">
-          <Reel src={HERO_VIDEO} label={C.reel} />
-        </div>
-        <span class="sticker sticker-yellow float-a">🌺 Tahiti</span>
-        <span class="sticker sticker-teal float-b">🌋 Hawaii</span>
+  <section class="hero wrap">
+    <div class="hero-text">
+      <p class="label">{C.label}</p>
+      <h1 set:html={C.h1} />
+      <p class="lead">{C.lead}</p>
+      <div class="actions">
+        <a class="btn" href={`${p}/guide/`}>{C.toGuide}</a>
+        <a class="link-arrow" href={`${p}/blog/`}>{C.watch}</a>
       </div>
     </div>
-    <svg class="hero-wave" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
-      <path class="w1" d="M0 70 C240 120 480 20 720 70 S1200 120 1440 70 V120 H0Z" />
-      <path class="w2" d="M0 90 C300 50 600 120 900 80 S1300 60 1440 90 V120 H0Z" />
-    </svg>
+    <figure class="hero-media">
+      <Reel src={HERO_VIDEO} label={C.heroMedia} />
+      <figcaption>{C.heroCaption} <span>17°32′S 149°34′W</span></figcaption>
+    </figure>
   </section>
 
   <Marquee />
 
   <section class="wrap section">
-    <p class="kicker">{C.where}</p>
-    <h2 class="big">{C.twoIslands}</h2>
+    <h2 class="section-title" set:html={C.whereTitle} />
     <div class="split">
-      <a class="island island-tahiti reveal" href={tahitiPost}>
-        <span class="island-emoji" aria-hidden="true">🌺</span>
-        <span class="chip">{C.tahitiChip}</span>
-        <h3>Tahiti</h3>
+      <a class="destination" href={tahitiPost}>
+        <Photo alt={C.tahitiPhoto} ratio="3 / 2" />
+        <span class="destination-no">01</span>
+        <h3>{C.tahitiTitle}</h3>
         <p>{C.tahitiText}</p>
-        <span class="island-more">{C.freeRead}</span>
+        <span class="link-arrow">{C.read}</span>
       </a>
-      <a class="island island-hawaii reveal" href={hawaiiPost}>
-        <span class="island-emoji" aria-hidden="true">🌋</span>
-        <span class="chip">Volunteering</span>
-        <h3>Hawaii</h3>
+      <a class="destination" href={hawaiiPost}>
+        <Photo alt={C.hawaiiPhoto} ratio="3 / 2" />
+        <span class="destination-no">02</span>
+        <h3>{C.hawaiiTitle}</h3>
         <p>{C.hawaiiText}</p>
-        <span class="island-more">{C.freeRead}</span>
+        <span class="link-arrow">{C.read}</span>
       </a>
     </div>
   </section>
 
+  <section class="wrap section faq-section">
+    <div>
+      <p class="label">{C.faqLabel}</p>
+      <h2 class="section-title" set:html={C.faqTitle} />
+    </div>
+    <Faq />
+  </section>
+
   <section class="videos" id="videos">
     <div class="wrap">
-      <p class="kicker kicker-light">{C.videosKicker}</p>
-      <h2 class="big">{C.videosTitle}</h2>
+      <p class="label">{C.videosLabel}</p>
+      <h2 class="section-title" set:html={C.videosTitle} />
       <div class="video-wall">
-        {VIDEOS.map((v, i) => <VideoEmbed url={v.url} caption={v.caption[lang]} tilt={tilts[i % tilts.length]} />)}
+        {VIDEOS.map((v) => <VideoEmbed url={v.url} caption={v.caption[lang]} />)}
       </div>
-      <div class="actions center">
+      <div class="actions">
         <a class="btn btn-light" href={SITE.socials.tiktok}>{C.moreTiktok}</a>
-        <a class="btn btn-ghost-light" href={SITE.socials.instagram}>{C.followInsta}</a>
+        <a class="link-arrow light" href={SITE.socials.instagram}>{C.followInsta}</a>
       </div>
     </div>
   </section>
 
   <section class="wrap section about">
-    <div class="polaroid reveal">
-      <div class="polaroid-photo" aria-hidden="true">📸</div>
-      <span class="hand">{C.thatsMe}</span>
-    </div>
+    <Photo alt={C.aboutPhoto} />
     <div>
-      <p class="kicker">{C.hi}</p>
-      <h2 class="big">{C.aboutTitle}</h2>
-      <p>{C.aboutText}</p>
+      <p class="label">{C.aboutLabel}</p>
+      <h2 class="section-title" set:html={C.aboutTitle} />
+      <p class="lead-dark">{C.aboutText}</p>
       <div class="todo">{C.aboutTodo}</div>
     </div>
   </section>
 
-  <section class="wrap section">
-    <div class="guide-band reveal">
-      <span class="price-sticker">{lang === 'en' ? 'only' : 'nur'} {SITE.price}</span>
+  <section class="guide-band">
+    <div class="wrap guide-band-inner">
       <div>
-        <p class="kicker kicker-light">{C.guideKicker}</p>
-        <h2 class="big">{C.guideTitle}</h2>
+        <p class="label">{C.guideLabel} · {SITE.price}</p>
+        <h2 class="section-title" set:html={C.guideTitle} />
+      </div>
+      <div>
         <p>{C.guideText}</p>
         <div class="actions">
           <BuyButton />
-          <a class="btn btn-ghost-light" href={`${p}/guide/`}>{C.whatsInside}</a>
+          <a class="link-arrow" href={`${p}/guide/`}>{C.whatsInside}</a>
         </div>
       </div>
     </div>
   </section>
 
   <section class="wrap section">
-    <p class="kicker">{C.blogKicker}</p>
-    <h2 class="big">{C.blogTitle}</h2>
+    <h2 class="section-title" set:html={C.blogTitle} />
     <PostList limit={3} />
   </section>
 
-  <section class="wrap section">
+  <section class="wrap section-tight">
     <CodeTicket />
   </section>
 </Base>
