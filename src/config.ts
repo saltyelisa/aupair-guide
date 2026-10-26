@@ -1,6 +1,5 @@
 // Alles, was du öfter ändern willst, steht hier an einem Ort.
 export const SITE = {
-  // Arbeitstitel, noch nicht final entschieden
   name: 'The Pacific Gap',
   description: {
     de: 'Als Au-pair nach Tahiti ohne Agentur oder Volunteering in Hawaii: ehrliche Infos aus erster Hand, Vorlagen und ein Guide, der dir die Fragen beantwortet, die ich ständig in den DMs bekomme.',
@@ -14,9 +13,9 @@ export const SITE = {
   buyLink: '',
   price: '9,90 €',
   socials: {
-    tiktok: 'https://www.tiktok.com/@DEINNAME',
-    instagram: 'https://www.instagram.com/DEINNAME',
-    youtube: 'https://www.youtube.com/@DEINNAME',
+    tiktok: 'https://www.tiktok.com/@saltyelisa',
+    instagram: 'https://www.instagram.com/saltyelisa',
+    youtube: 'https://www.youtube.com/@saltyelisa',
   },
 };
 

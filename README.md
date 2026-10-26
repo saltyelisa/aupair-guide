@@ -1,4 +1,4 @@
-# The Pacific Gap (Arbeitstitel)
+# The Pacific Gap
 
 Die Website für den Guide zu Au-pair in Tahiti und Volunteering in Hawaii. Gebaut mit Astro, als statische Seite, kostenlos hostbar auf Netlify oder Vercel.
 
