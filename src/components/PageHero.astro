@@ -1,0 +1,16 @@
+---
+interface Props { kicker?: string; title: string }
+const { kicker, title } = Astro.props;
+---
+<section class="page-hero">
+  <div class="hero-sun" aria-hidden="true"></div>
+  <div class="wrap post-header" style="position:relative">
+    {kicker && <p class="kicker kicker-light">{kicker}</p>}
+    <h1>{title}</h1>
+    <slot />
+  </div>
+  <svg class="hero-wave" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+    <path class="w1" d="M0 70 C240 120 480 20 720 70 S1200 120 1440 70 V120 H0Z" />
+    <path class="w2" d="M0 90 C300 50 600 120 900 80 S1300 60 1440 90 V120 H0Z" />
+  </svg>
+</section>

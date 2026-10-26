@@ -1,0 +1,97 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import BuyButton from '../components/BuyButton.astro';
+import { SITE } from '../config';
+import { UI, langFromPath } from '../i18n';
+
+const lang = langFromPath(Astro.url.pathname);
+const t = UI[lang];
+const C = {
+  de: {
+    title: 'Der Guide',
+    description: 'Der komplette Guide für Au-pair in Tahiti ohne Agentur und Volunteering in Hawaii, mit Vorlagen für Profil und Nachrichten an Familien.',
+    kicker: 'Der komplette Guide',
+    h1: 'Alles für Tahiti und Hawaii an einem Ort',
+    intro: 'Der Blog gibt dir den Überblick. Im Guide bekommst du die Schritt für Schritt Anleitung, meine Vorlagen und alles, was ich mir selbst am Anfang gewünscht hätte.',
+    insideKicker: 'Was drin ist',
+    insideTitle: 'Sechs Kapitel, null Agentur',
+    features: [
+      ['🏡', 'Familie finden', 'Wo Familien in Tahiti wirklich suchen, welche Gruppen sich lohnen und wie du auffällst.'],
+      ['💌', 'Vorlagen zum Kopieren', 'Fertige Texte für dein Profil und für die erste Nachricht an Familien und Hosts, auf Deutsch, Englisch und Französisch.'],
+      ['🛂', 'Visum und Einreise', 'Was du für Französisch-Polynesien und die USA brauchst, mit Links zu den offiziellen Quellen.'],
+      ['🩹', 'Versicherung und Kosten', 'Welche Versicherung passt und was du realistisch einplanen solltest.'],
+      ['🥥', 'Leute kennenlernen', 'Wie du vor Ort schnell Anschluss findest, damit du nicht nur mit der Familie Zeit verbringst.'],
+      ['🧭', 'Plan B', 'Was du tun kannst, wenn es mit der Familie oder dem Host nicht passt.'],
+    ],
+    formatTodo: 'Das Format ist noch offen: Online Guide mit Login, Notion Seite, E-Book oder PDF. Die Seite funktioniert mit allem, du musst nur den Kauf Link in src/config.ts eintragen.',
+    faqKicker: 'Noch Fragen?',
+    faqTitle: 'Häufige Fragen',
+    q1: 'Für wen ist der Guide?',
+    a1: 'Für alle, die ohne Agentur als Au-pair nach Tahiti oder zum Volunteering nach Hawaii wollen und sich nicht alles mühsam selbst zusammensuchen möchten.',
+    q2: 'Wie bekomme ich den Guide nach dem Kauf?',
+    a2Todo: 'Hängt vom Format und der Plattform ab (zum Beispiel Download Link per Mail über Payhip).',
+    q3: 'Sind die Infos aktuell?',
+    a3: 'Ich aktualisiere den Guide regelmäßig. Regeln zu Visum und Einreise ändern sich aber, deshalb verlinke ich immer die offiziellen Quellen, die du vor deiner Reise selbst checken solltest.',
+  },
+  en: {
+    title: 'The Guide',
+    description: 'The complete guide to being an au pair in Tahiti without an agency and volunteering in Hawaii, with templates for your profile and messages to families.',
+    kicker: 'The complete guide',
+    h1: 'Everything for Tahiti and Hawaii in one place',
+    intro: "The blog gives you the overview. The guide gives you the step by step plan, my templates and everything I wish I'd had when I started.",
+    insideKicker: "What's inside",
+    insideTitle: 'Six chapters, zero agency',
+    features: [
+      ['🏡', 'Find a family', 'Where families in Tahiti actually look, which groups are worth it and how to stand out.'],
+      ['💌', 'Templates to copy', 'Ready made texts for your profile and your first message to families and hosts, in English, German and French.'],
+      ['🛂', 'Visa and entry', 'What you need for French Polynesia and the US, with links to the official sources.'],
+      ['🩹', 'Insurance and costs', 'Which insurance fits and what you should realistically budget.'],
+      ['🥥', 'Meet people', "How to make friends fast so you're not only spending time with your family."],
+      ['🧭', 'Plan B', "What to do if things don't work out with your family or host."],
+    ],
+    formatTodo: 'The format is still open: online guide with login, Notion page, e-book or PDF. The page works with all of them, just add the buy link in src/config.ts.',
+    faqKicker: 'Any questions?',
+    faqTitle: 'FAQ',
+    q1: 'Who is the guide for?',
+    a1: "Anyone who wants to go to Tahiti as an au pair or volunteer in Hawaii without an agency, and doesn't want to piece everything together alone.",
+    q2: 'How do I get the guide after buying?',
+    a2Todo: 'Depends on the format and platform (for example a download link by email via Payhip).',
+    q3: 'Is the info up to date?',
+    a3: 'I update the guide regularly. Visa and entry rules do change though, so I always link the official sources you should check yourself before you travel.',
+  },
+}[lang];
+---
+<Base title={C.title} description={C.description}>
+  <PageHero kicker={C.kicker} title={C.h1}>
+    <p>{C.intro}</p>
+    <div class="actions">
+      <BuyButton />
+      <span class="sticker sticker-yellow">{t.only} {SITE.price}</span>
+    </div>
+  </PageHero>
+
+  <section class="wrap section">
+    <p class="kicker">{C.insideKicker}</p>
+    <h2 class="big">{C.insideTitle}</h2>
+    <div class="feature-grid">
+      {C.features.map(([emoji, title, text]) => (
+        <div class="feature reveal">
+          <span class="feature-emoji" aria-hidden="true">{emoji}</span>
+          <h3>{title}</h3>
+          <p>{text}</p>
+        </div>
+      ))}
+    </div>
+    <div class="todo">{C.formatTodo}</div>
+  </section>
+
+  <section class="wrap section faq">
+    <p class="kicker">{C.faqKicker}</p>
+    <h2 class="big">{C.faqTitle}</h2>
+    <details><summary>{C.q1}</summary><p>{C.a1}</p></details>
+    <details><summary>{C.q2}</summary><div class="todo">{C.a2Todo}</div></details>
+    <details><summary>{C.q3}</summary><p>{C.a3}</p></details>
+    <div class="actions"><BuyButton /></div>
+  </section>
+</Base>

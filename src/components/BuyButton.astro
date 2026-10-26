@@ -1,9 +1,12 @@
 ---
 import { SITE } from '../config';
+import { UI, langFromPath } from '../i18n';
+const lang = langFromPath(Astro.url.pathname);
+const t = UI[lang];
 // Sobald du Payhip oder Digistore24 eingerichtet hast, trag den Link in src/config.ts bei buyLink ein.
 ---
 {SITE.buyLink ? (
-  <a class="btn" href={SITE.buyLink} rel="noopener">Guide holen für {SITE.price}</a>
+  <a class="btn btn-hot" href={SITE.buyLink} rel="noopener">{t.buy} {SITE.price}</a>
 ) : (
-  <span class="btn" aria-disabled="true">Bald verfügbar</span>
+  <span class="btn btn-hot" aria-disabled="true">{t.soon}</span>
 )}

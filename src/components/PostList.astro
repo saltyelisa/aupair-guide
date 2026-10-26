@@ -1,18 +1,25 @@
 ---
 interface Props { limit?: number }
+import { UI, langFromPath } from '../i18n';
 const { limit } = Astro.props;
-const modules = Object.values(import.meta.glob('../pages/blog/*.md', { eager: true })) as any[];
+const lang = langFromPath(Astro.url.pathname);
+const t = UI[lang];
+const all = { de: import.meta.glob('../pages/blog/*.md', { eager: true }), en: import.meta.glob('../pages/en/blog/*.md', { eager: true }) };
+const modules = Object.values(all[lang]) as any[];
 const posts = modules
   .map((m) => ({ ...m.frontmatter, url: m.url }))
   .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
   .slice(0, limit);
+const emoji: Record<string, string> = { Tahiti: '🌺', Hawaii: '🌋' };
 ---
-<div class="grid">
+<div class="post-grid">
   {posts.map((post) => (
-    <a class="card stretch" href={post.url + '/'}>
-      <p class="eyebrow">{post.tag}</p>
+    <a class={`post-card theme-${post.tag?.toLowerCase()}`} href={post.url + '/'}>
+      <span class="post-card-emoji" aria-hidden="true">{emoji[post.tag] ?? '🌴'}</span>
+      <span class="chip">{post.tag}</span>
       <h3>{post.title}</h3>
-      <p class="small">{post.description}</p>
+      <p>{post.description}</p>
+      <span class="post-card-more">{t.readMore}</span>
     </a>
   ))}
 </div>

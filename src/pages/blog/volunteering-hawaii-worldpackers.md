@@ -4,6 +4,7 @@ title: "Volunteering in Hawaii mit Worldpackers: Meine ehrliche Erfahrung"
 description: "Wie Volunteering in Hawaii über Worldpackers funktioniert, worauf du bei Hosts achten solltest, was du für die Einreise wissen musst und wie du mit meinem Code sparst."
 date: 2026-10-20
 tag: Hawaii
+worldpackers: true
 ---
 
 Hawaii klingt erstmal unbezahlbar. Mit Volunteering wird es aber machbar: Du hilfst ein paar Stunden am Tag mit, zum Beispiel in einem Hostel, auf einer Farm oder bei einem Surfcamp, und bekommst dafür eine Unterkunft und oft auch Essen. Ich habe meine Stellen über Worldpackers gefunden und erzähle dir hier, wie das abläuft.
@@ -14,13 +15,9 @@ Hawaii klingt erstmal unbezahlbar. Mit Volunteering wird es aber machbar: Du hil
 
 Du legst ein Profil an, zahlst eine Jahresmitgliedschaft und kannst dich dann bei Hosts bewerben. Der Vorteil gegenüber Facebook Gruppen ist, dass es Bewertungen gibt und Worldpackers dich unterstützt, wenn vor Ort etwas schiefgeht.
 
-<div class="code-box">
-  Mit meinem Code sparst du bei der Mitgliedschaft
-  <strong>DEINCODE</strong>
-  <a href="https://www.worldpackers.com/">Zu Worldpackers</a>
-</div>
+Meinen Code zum Kopieren findest du ganz unten in diesem Artikel.
 
-<div class="todo">Deinen echten Code und Link eintragen, und wie viel man damit spart.</div>
+<div class="todo">Deinen echten Code und Link in src/config.ts eintragen, und hier schreiben, wie viel man damit spart.</div>
 
 ## Worauf du bei Hosts achten solltest
 

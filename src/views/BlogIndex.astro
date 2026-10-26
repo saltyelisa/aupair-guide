@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import PostList from '../components/PostList.astro';
+import { langFromPath } from '../i18n';
+const C = {
+  de: { description: 'Gratis Infos zu Au-pair in Tahiti ohne Agentur und Volunteering in Hawaii.', kicker: '100 % gratis', title: 'Der Blog', intro: 'Hier teile ich alles, was ich gelernt habe. Kostenlos, ehrlich und so aktuell wie möglich.' },
+  en: { description: 'Free info on being an au pair in Tahiti without an agency and volunteering in Hawaii.', kicker: '100 % free', title: 'The Blog', intro: 'Everything I learned, shared for free. Honest and as up to date as possible.' },
+}[langFromPath(Astro.url.pathname)];
+---
+<Base title="Blog" description={C.description}>
+  <PageHero kicker={C.kicker} title={C.title}><p>{C.intro}</p></PageHero>
+  <section class="wrap section"><PostList /></section>
+</Base>

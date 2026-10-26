@@ -1,0 +1,34 @@
+---
+// Zeigt ein TikTok oder Instagram Video im Handy Rahmen.
+// Aus Datenschutzgründen (DSGVO) wird das Video erst nach einem Klick geladen.
+import { UI, langFromPath } from '../i18n';
+const t = UI[langFromPath(Astro.url.pathname)];
+interface Props { url: string; caption: string; tilt?: number }
+const { url, caption, tilt = 0 } = Astro.props;
+
+const isPlaceholder = url.includes('DEINNAME');
+const tiktokId = url.match(/tiktok\.com\/.*\/video\/(\d+)/)?.[1];
+const instaCode = url.match(/instagram\.com\/(?:reel|p)\/([^/?]+)/)?.[1];
+const platform = url.includes('instagram.com') ? 'Instagram' : 'TikTok';
+const src = tiktokId
+  ? `https://www.tiktok.com/embed/v2/${tiktokId}`
+  : instaCode
+    ? `https://www.instagram.com/reel/${instaCode}/embed`
+    : '';
+---
+<figure class="phone" style={`--tilt:${tilt}deg`}>
+  <div class="phone-screen" data-embed={isPlaceholder ? undefined : src}>
+    <div class="phone-cover">
+      <span class="phone-platform">{platform}</span>
+      {isPlaceholder ? (
+        <span class="phone-hint">{t.videoHint}</span>
+      ) : (
+        <button class="play" type="button" aria-label={`${t.play}: ${caption}`}>▶</button>
+      )}
+      <span class="phone-caption">{caption}</span>
+    </div>
+  </div>
+  {!isPlaceholder && (
+    <figcaption class="phone-note">{t.videoNote(platform)}</figcaption>
+  )}
+</figure>
