@@ -1,0 +1,65 @@
+---
+import { SITE } from '../config';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  type?: 'website' | 'article';
+}
+const { title, description = SITE.description, type = 'website' } = Astro.props;
+const fullTitle = title ? `${title} | ${SITE.name}` : SITE.name;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const path = Astro.url.pathname;
+const nav = [
+  { href: '/', label: 'Start' },
+  { href: '/blog/', label: 'Blog' },
+  { href: '/guide/', label: 'Der Guide' },
+];
+---
+<!doctype html>
+<html lang={SITE.lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="de_AT" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <slot name="head" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a class="logo" href="/">{SITE.name}</a>
+        <nav aria-label="Hauptmenü">
+          {nav.map((item) => (
+            <a href={item.href} aria-current={(item.href === '/' ? path === '/' : path.startsWith(item.href)) ? 'page' : undefined}>
+              {item.label}
+            </a>
+          ))}
+        </nav>
+      </div>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="wrap footer-inner">
+        <p>
+          Folg mir auf <a href={SITE.socials.tiktok}>TikTok</a>, <a href={SITE.socials.instagram}>Instagram</a> und <a href={SITE.socials.youtube}>YouTube</a>.
+        </p>
+        <p class="small">
+          <a href="/impressum/">Impressum</a> · <a href="/datenschutz/">Datenschutz</a> · © {new Date().getFullYear()} {SITE.author}
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

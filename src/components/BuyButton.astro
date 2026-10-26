@@ -1,0 +1,9 @@
+---
+import { SITE } from '../config';
+// Sobald du Payhip oder Digistore24 eingerichtet hast, trag den Link in src/config.ts bei buyLink ein.
+---
+{SITE.buyLink ? (
+  <a class="btn" href={SITE.buyLink} rel="noopener">Guide holen für {SITE.price}</a>
+) : (
+  <span class="btn" aria-disabled="true">Bald verfügbar</span>
+)}

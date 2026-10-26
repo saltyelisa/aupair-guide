@@ -1,0 +1,18 @@
+---
+interface Props { limit?: number }
+const { limit } = Astro.props;
+const modules = Object.values(import.meta.glob('../pages/blog/*.md', { eager: true })) as any[];
+const posts = modules
+  .map((m) => ({ ...m.frontmatter, url: m.url }))
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  .slice(0, limit);
+---
+<div class="grid">
+  {posts.map((post) => (
+    <a class="card stretch" href={post.url + '/'}>
+      <p class="eyebrow">{post.tag}</p>
+      <h3>{post.title}</h3>
+      <p class="small">{post.description}</p>
+    </a>
+  ))}
+</div>

@@ -1,0 +1,59 @@
+---
+import Base from '../layouts/Base.astro';
+import PostList from '../components/PostList.astro';
+import { SITE } from '../config';
+---
+<Base>
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow">Ohne Agentur. Ehrlich. Aus erster Hand.</p>
+      <h1>Als Au-pair nach Tahiti oder volunteeren in Hawaii</h1>
+      <p>
+        Hi, ich bin {SITE.author}! Ich war selbst ohne Agentur auf Tahiti und habe in Hawaii volunteert.
+        Hier findest du alles, was ich ständig in Kommentaren und DMs gefragt werde, und vieles davon gratis.
+      </p>
+      <div class="actions">
+        <a class="btn" href="/blog/">Gratis Infos lesen</a>
+        <a class="btn secondary" href="/guide/">Zum kompletten Guide</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>Wobei ich dir helfe</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>🌺 Au-pair in Tahiti</h3>
+          <p>Wie du ohne Agentur eine Gastfamilie in Französisch-Polynesien findest, was du für Einreise und Versicherung brauchst und was der Alltag dort wirklich kostet.</p>
+          <a href="/blog/au-pair-tahiti-ohne-agentur/">Zum Artikel</a>
+        </div>
+        <div class="card">
+          <h3>🌋 Volunteering in Hawaii</h3>
+          <p>Wie Volunteering über Worldpackers funktioniert, worauf du bei Hosts achten solltest und wie du mit meinem Code sparst.</p>
+          <a href="/blog/volunteering-hawaii-worldpackers/">Zum Artikel</a>
+        </div>
+        <div class="card">
+          <h3>💬 Wenn es nicht passt</h3>
+          <p>Was du tun kannst, wenn es mit der Familie oder dem Host nicht klappt. Darüber redet fast niemand, aber es passiert öfter, als man denkt.</p>
+          <a href="/guide/">Mehr im Guide</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="todo">
+        Kurz über dich: wann du wo warst (Gap Year 2024/25 und 2026), ein Foto von dir und ein, zwei Sätze, warum du diese Seite machst.
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>Neu im Blog</h2>
+      <PostList limit={3} />
+    </div>
+  </section>
+</Base>
