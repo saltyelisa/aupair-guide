@@ -55,7 +55,7 @@ export const UI = {
     videoHint: 'Hier kommt dein Video hin. Link in src/config.ts eintragen.',
     videoNote: (p: string) => `Beim Abspielen lädt ${p} Inhalte von deren Servern.`,
     reelHint: 'MP4 ablegen in',
-    lockedText: 'Meine fertigen Vorlagen auf Französisch, Englisch und Deutsch, plus die Gruppen, in denen ich gesucht habe, stehen im Guide.',
+    lockedText: 'Mein echtes Profil und die Nachrichten, die ich Familien geschrieben habe, plus die Gruppen, in denen ich gesucht habe, stehen im Guide.',
     lockedBtn: 'Willst du mehr sehen? Zum Guide',
   },
   en: {
@@ -85,7 +85,7 @@ export const UI = {
     videoHint: 'Your video goes here. Add the link in src/config.ts.',
     videoNote: (p: string) => `Playing loads content from ${p}'s servers.`,
     reelHint: 'Put an MP4 at',
-    lockedText: 'My ready made templates in French, English and German, plus the groups where I searched, are in the guide.',
+    lockedText: 'My real profile and the messages I wrote to families, plus the groups where I searched, are in the guide.',
     lockedBtn: 'Want to see more? Get the guide',
   },
 } as const;

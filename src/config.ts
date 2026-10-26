@@ -13,8 +13,8 @@ export const SITE = {
   buyLink: '',
   price: '9,90 €',
   socials: {
-    tiktok: 'https://www.tiktok.com/@saltyelisa',
-    instagram: 'https://www.instagram.com/saltyelisa',
+    tiktok: 'https://www.tiktok.com/@elisaveta.schwarz',
+    instagram: 'https://www.instagram.com/elisaveta.schwarz',
     youtube: 'https://www.youtube.com/@saltyelisa',
   },
 };
