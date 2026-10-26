@@ -23,7 +23,7 @@ export const SITE = {
 // Einfach den Link aus TikTok ("Teilen" > "Link kopieren") oder Instagram (Reel > "Link kopieren") einfügen.
 // Solange "DEINNAME" drinsteht, wird ein Platzhalter angezeigt.
 export const VIDEOS = [
-  { url: 'https://www.tiktok.com/@DEINNAME/video/1', caption: { de: 'Mein erster Tag auf Tahiti', en: 'My first day in Tahiti' } },
+  { url: 'https://www.tiktok.com/@elisaveta.schwarz/video/7489746920173309206', caption: { de: 'Aus meinem TikTok', en: 'From my TikTok' } },
   { url: 'https://www.instagram.com/reel/DEINNAME/', caption: { de: 'So hab ich meine Gastfamilie gefunden', en: 'How I found my host family' } },
   { url: 'https://www.tiktok.com/@DEINNAME/video/2', caption: { de: 'Was Tahiti wirklich kostet', en: 'What Tahiti really costs' } },
   { url: 'https://www.tiktok.com/@DEINNAME/video/3', caption: { de: 'Volunteering auf Hawaii', en: 'Volunteering in Hawaii' } },
