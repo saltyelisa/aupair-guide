@@ -225,3 +225,5 @@ nav a:hover, nav a[aria-current='page'] { text-decoration: underline; text-under
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+.chapters h3 a { text-decoration: none; }
+.chapters h3 a:hover { color: var(--coral); }

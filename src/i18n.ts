@@ -9,7 +9,10 @@ export const PAIRS: [string, string][] = [
   ['/blog/', '/en/blog/'],
   ['/guide/', '/en/guide/'],
   ['/blog/au-pair-tahiti-ohne-agentur/', '/en/blog/au-pair-tahiti-without-agency/'],
-  ['/blog/volunteering-hawaii-worldpackers/', '/en/blog/volunteering-hawaii-worldpackers/'],
+  ['/blog/volunteering-hawaii-ohne-agentur/', '/en/blog/volunteering-hawaii-without-agency/'],
+  ['/blog/au-pair-mit-oder-ohne-agentur/', '/en/blog/au-pair-with-or-without-agency/'],
+  ['/blog/gap-year-pazifik-kosten/', '/en/blog/pacific-gap-year-costs/'],
+  ['/blog/fluege-nach-tahiti/', '/en/blog/flights-to-tahiti/'],
 ];
 
 export function langFromPath(path: string): Lang {

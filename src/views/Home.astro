@@ -17,7 +17,7 @@ const C = {
   de: {
     label: 'Au-pair Tahiti · Volunteering Hawaii',
     h1: 'Ein Jahr im Pazifik. <em>Ohne Agentur.</em>',
-    lead: `Ich bin ${SITE.author}. Ich war als Au-pair auf Tahiti und als Volunteer auf Hawaii, beide Male ohne Agentur. Hier schreibe ich alles auf, was ich vorher gerne gewusst hätte.`,
+    lead: `Ich bin ${SITE.author}. Ich war als Au-pair auf Tahiti und als Volunteer auf Hawaii, beide Male ohne Agentur, und es war günstiger, als alle dachten. Hier schreibe ich alles auf, was ich vorher gerne gewusst hätte.`,
     toGuide: 'Zum Guide',
     watch: 'Erstmal gratis lesen',
     heroMedia: 'Dein Lieblingsfoto oder Clip',
@@ -27,7 +27,13 @@ const C = {
     tahitiText: 'Gastfamilie ohne Agentur finden, Einreise, Versicherung und was das Leben in Französisch-Polynesien wirklich kostet.',
     tahitiPhoto: 'Foto aus Tahiti',
     hawaiiTitle: 'Volunteering auf Hawaii',
-    hawaiiText: 'Mit Worldpackers gratis wohnen, die richtigen Hosts finden und mit meinem Code bei der Mitgliedschaft sparen.',
+    hawaiiText: 'Gratis wohnen gegen ein paar Stunden Mithilfe. Wie du eine Stelle über Kontakte oder über Worldpackers findest, und worauf du achten musst.',
+    whyTitle: 'Warum <em>ohne Agentur?</em>',
+    why: [
+      ['Günstiger, als du denkst', 'Tahiti und Hawaii sind nicht nur was für Reiche. Ohne Agenturgebühr, mit Unterkunft und Essen, kann ein Jahr dort sogar billiger sein als ein Agentur Programm.'],
+      ['Mehr Freiheit', 'Du entscheidest, wohin, wie lange und mit welcher Familie. Kein Katalog, keine festen Laufzeiten.'],
+      ['Ziele, die sonst keiner hat', 'Für Französisch-Polynesien gibt es kaum Agenturen. Wer es selbst macht, kommt an Orte, die in keinem Programm stehen.'],
+    ],
     hawaiiPhoto: 'Foto aus Hawaii',
     read: 'Artikel lesen',
     faqLabel: 'Häufige Fragen',
@@ -51,7 +57,7 @@ const C = {
   en: {
     label: 'Au pair Tahiti · Volunteering Hawaii',
     h1: 'A year in the Pacific. <em>No agency.</em>',
-    lead: `I'm ${SITE.author}. I was an au pair in Tahiti and a volunteer in Hawaii, both times without an agency. Here I write down everything I wish I'd known before.`,
+    lead: `I'm ${SITE.author}. I was an au pair in Tahiti and a volunteer in Hawaii, both times without an agency, and it was cheaper than everyone thought. Here I write down everything I wish I'd known before.`,
     toGuide: 'Get the guide',
     watch: 'Read for free first',
     heroMedia: 'Your favourite photo or clip',
@@ -61,7 +67,13 @@ const C = {
     tahitiText: 'Find a host family without an agency, sort out entry and insurance, and see what life in French Polynesia really costs.',
     tahitiPhoto: 'Photo from Tahiti',
     hawaiiTitle: 'Volunteering in Hawaii',
-    hawaiiText: 'Stay for free with Worldpackers, find the right hosts and save on your membership with my code.',
+    hawaiiText: 'Free accommodation for a few hours of help a day. How to find a spot through contacts or Worldpackers, and what to watch out for.',
+    whyTitle: 'Why <em>no agency?</em>',
+    why: [
+      ['Cheaper than you think', "Tahiti and Hawaii aren't only for rich people. With no agency fee and room and food covered, a year there can even be cheaper than an agency program."],
+      ['More freedom', 'You decide where, how long and with which family. No catalogue, no fixed terms.'],
+      ['Places nobody else gets to', 'There are hardly any agencies for French Polynesia. Doing it yourself takes you places no program lists.'],
+    ],
     hawaiiPhoto: 'Photo from Hawaii',
     read: 'Read the article',
     faqLabel: 'FAQ',
@@ -84,7 +96,10 @@ const C = {
   },
 }[lang];
 const tahitiPost = lang === 'en' ? '/en/blog/au-pair-tahiti-without-agency/' : '/blog/au-pair-tahiti-ohne-agentur/';
-const hawaiiPost = `${p}/blog/volunteering-hawaii-worldpackers/`;
+const hawaiiPost = lang === 'en' ? '/en/blog/volunteering-hawaii-without-agency/' : '/blog/volunteering-hawaii-ohne-agentur/';
+const whyLinks = lang === 'en'
+  ? ['/en/blog/pacific-gap-year-costs/', '/en/blog/au-pair-with-or-without-agency/', '/en/blog/au-pair-with-or-without-agency/']
+  : ['/blog/gap-year-pazifik-kosten/', '/blog/au-pair-mit-oder-ohne-agentur/', '/blog/au-pair-mit-oder-ohne-agentur/'];
 ---
 <Base>
   <section class="hero wrap">
@@ -123,6 +138,19 @@ const hawaiiPost = `${p}/blog/volunteering-hawaii-worldpackers/`;
         <span class="link-arrow">{C.read}</span>
       </a>
     </div>
+  </section>
+
+  <section class="wrap section">
+    <h2 class="section-title" set:html={C.whyTitle} />
+    <ol class="chapters">
+      {C.why.map(([title, text], i) => (
+        <li>
+          <span class="destination-no">{String(i + 1).padStart(2, '0')}</span>
+          <h3><a href={whyLinks[i]}>{title}</a></h3>
+          <p>{text}</p>
+        </li>
+      ))}
+    </ol>
   </section>
 
   <section class="wrap section faq-section">

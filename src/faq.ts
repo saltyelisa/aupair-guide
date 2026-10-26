@@ -13,6 +13,10 @@ export const FAQ: Record<Lang, FaqItem[]> = {
       todo: 'Ein Satz, wie lange es bei dir gedauert hat.',
     },
     {
+      q: 'Ist Tahiti nicht nur was für Reiche?',
+      a: 'Nein. Teuer ist Tahiti vor allem für Touristen, weil Hotels und Essen viel kosten. Als Au-pair wohnst und isst du bei der Familie, und ohne Agentur zahlst du auch keine Vermittlungsgebühr. Am Ende kann das sogar günstiger sein als ein Agentur Programm in einem scheinbar billigeren Land.',
+    },
+    {
       q: 'Brauche ich ein Visum für Französisch-Polynesien?',
       a: 'Das hängt von deiner Staatsbürgerschaft und davon ab, wie lange du bleibst. Französisch-Polynesien gehört zu Frankreich, hat aber eigene Einreiseregeln, die nicht automatisch denen im Schengen Raum entsprechen.',
       check: 'Aktuelle Regeln für EU Bürger und für Au-pair Aufenthalte mit offiziellen Quellen abgleichen.',
@@ -42,6 +46,10 @@ export const FAQ: Record<Lang, FaqItem[]> = {
       q: 'Can I become an au pair in Tahiti without an agency?',
       a: 'Yes. There are hardly any agencies for French Polynesia, so most au pairs find their family directly through local Facebook and WhatsApp groups or au pair platforms. It takes some patience, but you pay no placement fee.',
       todo: 'One sentence on how long it took you.',
+    },
+    {
+      q: "Isn't Tahiti only for rich people?",
+      a: "No. Tahiti is mainly expensive for tourists, because hotels and food cost a lot. As an au pair you live and eat with the family, and without an agency there's no placement fee. In the end it can even be cheaper than an agency program in a country that seems cheaper.",
     },
     {
       q: 'Do I need a visa for French Polynesia?',
