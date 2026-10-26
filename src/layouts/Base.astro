@@ -83,7 +83,7 @@ const nav = [
     </footer>
     <script>
       // Videos erst nach Klick laden (Datenschutz), Code kopieren
-      document.querySelectorAll<HTMLElement>('.phone-screen[data-embed]').forEach((el) => {
+      document.querySelectorAll<HTMLElement>('.phone-screen[data-embed], .playlist-embed[data-embed]').forEach((el) => {
         el.addEventListener('click', () => {
           const iframe = document.createElement('iframe');
           iframe.src = el.dataset.embed!;

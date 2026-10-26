@@ -6,6 +6,7 @@ import Reel from '../components/Reel.astro';
 import Photo from '../components/Photo.astro';
 import Marquee from '../components/Marquee.astro';
 import Faq from '../components/Faq.astro';
+import Playlist from '../components/Playlist.astro';
 import PolynesiaMap from '../components/PolynesiaMap.astro';
 import CodeTicket from '../components/CodeTicket.astro';
 import BuyButton from '../components/BuyButton.astro';
@@ -193,6 +194,7 @@ const whyLinks = lang === 'en'
       <h2 class="section-title" set:html={C.aboutTitle} />
       <p class="lead-dark">{C.aboutText}</p>
       <div class="todo">{C.aboutTodo}</div>
+      <Playlist />
     </div>
   </section>
 

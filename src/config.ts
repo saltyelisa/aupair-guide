@@ -32,3 +32,6 @@ export const VIDEOS = [
 // Kurze eigene Clips (MP4, Hochformat, ohne Ton, ein paar Sekunden), die von selbst abspielen.
 // Datei in public/videos/ legen, z. B. public/videos/hero.mp4
 export const HERO_VIDEO = '/videos/hero.mp4';
+
+// Deine Spotify Playlist (Link aus Spotify: Teilen > Link zur Playlist kopieren). Leer = Platzhalter.
+export const SPOTIFY_PLAYLIST = '';
