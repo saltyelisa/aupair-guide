@@ -1,0 +1,16 @@
+---
+import { SITE } from '../config';
+import { UI, langFromPath } from '../i18n';
+const t = UI[langFromPath(Astro.url.pathname)];
+---
+<div class="ticket">
+  <div>
+    <p class="label">{t.ticketHand}</p>
+    <strong class="ticket-code">{SITE.worldpackersCode}</strong>
+    <p class="small">{t.ticketText}</p>
+  </div>
+  <div class="ticket-actions">
+    <button class="btn btn-outline" type="button" data-copy={SITE.worldpackersCode} data-copied={t.copied}>{t.copy}</button>
+    <a href={SITE.worldpackersLink} rel="noopener sponsored">{t.toWorldpackers}</a>
+  </div>
+</div>

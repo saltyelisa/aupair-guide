@@ -1,0 +1,13 @@
+---
+// Platzhalter für deine eigenen Fotos. Sobald du ein Bild in public/fotos/ ablegst, src angeben.
+interface Props { src?: string; alt: string; caption?: string; ratio?: string }
+const { src, alt, caption, ratio = '4 / 5' } = Astro.props;
+---
+<figure class="photo">
+  {src ? (
+    <img src={src} alt={alt} loading="lazy" style={`aspect-ratio:${ratio}`} />
+  ) : (
+    <div class="media-placeholder" style={`aspect-ratio:${ratio}`}><span>{alt}</span><small>public/fotos/</small></div>
+  )}
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>

@@ -1,0 +1,11 @@
+---
+interface Props { kicker?: string; title: string }
+const { kicker, title } = Astro.props;
+---
+<section class="page-hero">
+  <div class="wrap">
+    {kicker && <p class="label">{kicker}</p>}
+    <h1 set:html={title} />
+    <slot />
+  </div>
+</section>

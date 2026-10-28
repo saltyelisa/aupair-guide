@@ -1,0 +1,40 @@
+---
+import Base from './Base.astro';
+import PageHero from '../components/PageHero.astro';
+import CodeTicket from '../components/CodeTicket.astro';
+import { SITE } from '../config';
+import { UI, langFromPath } from '../i18n';
+const lang = langFromPath(Astro.url.pathname);
+const t = UI[lang];
+
+const { frontmatter } = Astro.props;
+const date = new Date(frontmatter.date);
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: frontmatter.title,
+  description: frontmatter.description,
+  datePublished: date.toISOString(),
+  author: { '@type': 'Person', name: SITE.author },
+  inLanguage: lang,
+};
+---
+<Base title={frontmatter.title} description={frontmatter.description} type="article">
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
+  <PageHero kicker={frontmatter.tag} title={frontmatter.title}>
+    <p class="meta">
+      {t.by} {SITE.author} · <time datetime={date.toISOString()}>{date.toLocaleDateString(t.dateLocale, { day: 'numeric', month: 'long', year: 'numeric' })}</time>
+    </p>
+  </PageHero>
+  <article class="wrap post">
+    <div class="prose">
+      <slot />
+    </div>
+    {frontmatter.worldpackers && <CodeTicket />}
+    <aside class="cta-box">
+      <h2>{t.ctaTitle}</h2>
+      <p>{t.ctaText}</p>
+      <a class="btn" href={lang === 'en' ? '/en/guide/' : '/guide/'}>{t.ctaBtn}</a>
+    </aside>
+  </article>
+</Base>

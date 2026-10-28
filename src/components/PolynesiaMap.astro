@@ -1,0 +1,105 @@
+---
+// Interaktive Karte von Französisch-Polynesien (eigenes SVG, lädt nichts von fremden Servern).
+// Lage der Inseln ist vereinfacht und nicht maßstabsgetreu für Navigation gedacht.
+import { langFromPath } from '../i18n';
+const lang = langFromPath(Astro.url.pathname);
+
+const k = 43.5;
+const pos = (lon: number, lat: number) => ({ x: (lon + 156) * k, y: (-7 - lat) * k });
+
+const groups = [
+  {
+    id: 'society', cx: 230, cy: 440, rx: 100, ry: 62,
+    name: { de: 'Gesellschaftsinseln', en: 'Society Islands' },
+    text: {
+      de: 'Hier liegt Tahiti mit der Hauptstadt Papeete und dem internationalen Flughafen, also landest du fast sicher hier. Die meisten Au-pair Familien wohnen auf Tahiti. Moorea ist die Nachbarinsel und nur eine kurze Fährfahrt entfernt. Weiter im Nordwesten liegen Huahine, Raiatea und Bora Bora.',
+      en: "This is where Tahiti is, with the capital Papeete and the international airport, so you'll almost certainly land here. Most au pair families live on Tahiti. Moorea is the neighbouring island, just a short ferry ride away. Further northwest are Huahine, Raiatea and Bora Bora.",
+    },
+    islands: [['Tahiti', -149.43, -17.65, 'start', 12, 10], ['Moorea', -149.83, -17.53, 'end', -10, -6], ['Bora Bora', -151.74, -16.5, 'end', -10, -4], ['Huahine', -151.0, -16.75, 'start', 8, -10], ['Raiatea', -151.45, -16.8, 'end', -10, 22]],
+  },
+  {
+    id: 'tuamotu', cx: 530, cy: 405, rx: 195, ry: 105,
+    name: { de: 'Tuamotus', en: 'Tuamotus' },
+    text: {
+      de: 'Fast 80 Atolle, also flache Ringe aus Korallen rund um eine Lagune. Bekannt fürs Tauchen und Schnorcheln, zum Beispiel Rangiroa, Tikehau und Fakarava. Sehr ruhig und abgelegen.',
+      en: 'Almost 80 atolls, flat rings of coral around a lagoon. Famous for diving and snorkelling, for example Rangiroa, Tikehau and Fakarava. Very quiet and remote.',
+    },
+    islands: [['Rangiroa', -147.65, -15.1, 'start', 10, 14], ['Tikehau', -148.2, -15.0, 'end', -10, -4], ['Fakarava', -145.6, -16.3, 'start', 10, 6], ['Hao', -140.9, -18.1, 'start', 10, 6]],
+  },
+  {
+    id: 'marquesas', cx: 715, cy: 100, rx: 90, ry: 60,
+    name: { de: 'Marquesas', en: 'Marquesas' },
+    text: {
+      de: 'Ganz im Norden, weit weg von allem. Steile, grüne Berge statt Lagunen. Auf Hiva Oa sind der Maler Paul Gauguin und der Sänger Jacques Brel begraben.',
+      en: 'Far up north, far from everything. Steep green mountains instead of lagoons. The painter Paul Gauguin and the singer Jacques Brel are buried on Hiva Oa.',
+    },
+    islands: [['Nuku Hiva', -140.1, -8.86, 'end', -10, 6], ['Hiva Oa', -139.0, -9.75, 'start', 10, 8]],
+  },
+  {
+    id: 'austral', cx: 285, cy: 705, rx: 120, ry: 55,
+    name: { de: 'Austral Inseln', en: 'Austral Islands' },
+    text: {
+      de: 'Im Süden, etwas kühler als Tahiti und kaum touristisch. Rurutu ist bekannt dafür, dass man dort Wale beobachten kann.',
+      en: 'Down south, a bit cooler than Tahiti and hardly touristy. Rurutu is known for whale watching.',
+    },
+    islands: [['Rurutu', -151.35, -22.45, 'start', 10, 6], ['Tubuai', -149.47, -23.37, 'start', 10, 6], ['Raivavae', -147.65, -23.87, 'start', 10, 6]],
+  },
+  {
+    id: 'gambier', cx: 915, cy: 700, rx: 55, ry: 40,
+    name: { de: 'Gambierinseln', en: 'Gambier Islands' },
+    text: {
+      de: 'Ganz im Südosten und am weitesten weg von Tahiti. Hauptinsel ist Mangareva, bekannt für ihre Perlenzucht.',
+      en: 'Far southeast and the furthest from Tahiti. The main island is Mangareva, known for pearl farming.',
+    },
+    islands: [['Mangareva', -134.97, -23.12, 'end', -10, -12]],
+  },
+];
+const tahiti = pos(-149.43, -17.65);
+const hint = lang === 'en' ? 'Tap an island group' : 'Tipp auf eine Inselgruppe';
+---
+<div class="map" data-map>
+  <svg class="map-svg" viewBox="30 20 950 760" role="img" aria-label={lang === 'en' ? 'Map of French Polynesia' : 'Karte von Französisch-Polynesien'}>
+    {groups.map((g, i) => (
+      <g class={i === 0 ? 'map-group active' : 'map-group'} data-group={g.id} tabindex="0" role="button" aria-label={g.name[lang]}>
+        <ellipse cx={g.cx} cy={g.cy} rx={g.rx} ry={g.ry} />
+        {g.islands.map(([name, lon, lat, anchor, dx, dy]) => {
+          const p = pos(lon as number, lat as number);
+          return (
+            <>
+              <circle cx={p.x} cy={p.y} r={name === 'Tahiti' ? 8 : 5} />
+              <text x={p.x + (dx as number)} y={p.y + (dy as number)} text-anchor={anchor} class={name === 'Tahiti' ? 'map-main' : ''}>{name}</text>
+            </>
+          );
+        })}
+      </g>
+    ))}
+    <circle class="map-pulse" cx={tahiti.x} cy={tahiti.y} r="14" />
+  </svg>
+  <div class="map-info">
+    <p class="label">{hint}</p>
+    <div class="map-tabs">
+      {groups.map((g, i) => <button type="button" data-tab={g.id} aria-pressed={i === 0 ? 'true' : 'false'}>{g.name[lang]}</button>)}
+    </div>
+    {groups.map((g, i) => (
+      <div class="map-panel" data-panel={g.id} hidden={i !== 0}>
+        <h3>{g.name[lang]}</h3>
+        <p>{g.text[lang]}</p>
+      </div>
+    ))}
+    <div class="todo">{lang === 'en' ? 'Your personal tip for each island group, if you were there.' : 'Dein persönlicher Tipp zu den Inselgruppen, auf denen du warst.'}</div>
+  </div>
+</div>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-map]').forEach((map) => {
+    const select = (id: string) => {
+      map.querySelectorAll<HTMLElement>('[data-group]').forEach((g) => g.classList.toggle('active', g.dataset.group === id));
+      map.querySelectorAll<HTMLElement>('[data-tab]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.tab === id)));
+      map.querySelectorAll<HTMLElement>('[data-panel]').forEach((p) => (p.hidden = p.dataset.panel !== id));
+    };
+    map.querySelectorAll<HTMLElement>('[data-group]').forEach((g) => {
+      g.addEventListener('click', () => select(g.dataset.group!));
+      g.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(g.dataset.group!); } });
+    });
+    map.querySelectorAll<HTMLElement>('[data-tab]').forEach((b) => b.addEventListener('click', () => select(b.dataset.tab!)));
+  });
+</script>

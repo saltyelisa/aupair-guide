@@ -1,0 +1,20 @@
+---
+// Eigener kurzer Clip, der stumm und in Schleife von selbst abspielt.
+// Gibt es die Datei (noch) nicht, wird ein Platzhalter für ein Foto oder Video gezeigt.
+import { existsSync } from 'node:fs';
+import { UI, langFromPath } from '../i18n';
+const t = UI[langFromPath(Astro.url.pathname)];
+interface Props { src: string; label?: string }
+const { src, label = 'Foto oder Clip' } = Astro.props;
+const hasVideo = existsSync(`public${src}`);
+---
+<div class="media">
+  {hasVideo ? (
+    <video src={src} autoplay muted loop playsinline preload="metadata"></video>
+  ) : (
+    <div class="media-placeholder">
+      <span>{label}</span>
+      <small>{t.reelHint} public{src}</small>
+    </div>
+  )}
+</div>

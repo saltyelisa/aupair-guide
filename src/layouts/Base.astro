@@ -1,0 +1,103 @@
+---
+import { SITE } from '../config';
+import { UI, alternates, langFromPath, home } from '../i18n';
+import '@fontsource/instrument-serif/400.css';
+import '@fontsource/instrument-serif/400-italic.css';
+import '@fontsource-variable/hanken-grotesk';
+import '@fontsource/dm-mono/400.css';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  type?: 'website' | 'article';
+}
+const path = Astro.url.pathname;
+const lang = langFromPath(path);
+const t = UI[lang];
+const { title, description = SITE.description[lang], type = 'website' } = Astro.props;
+const fullTitle = title ? `${title} | ${SITE.name}` : SITE.name;
+const canonical = new URL(path, Astro.site);
+const alt = alternates(path);
+const otherLang = lang === 'de' ? 'en' : 'de';
+const switchHref = alt[otherLang] ?? home(otherLang);
+const prefix = lang === 'en' ? '/en' : '';
+const nav = [
+  { href: `${prefix}/blog/`, label: t.navBlog },
+  { href: `${prefix}/guide/`, label: t.navGuide },
+];
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {Object.entries(alt).map(([l, href]) => <link rel="alternate" hreflang={l} href={new URL(href, Astro.site)} />)}
+    {alt.de && <link rel="alternate" hreflang="x-default" href={new URL(alt.de, Astro.site)} />}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="theme-color" content="#f3eee5" />
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={t.locale} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <slot name="head" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a class="logo" href={home(lang)}>{SITE.name}</a>
+        <nav aria-label="Menu">
+          {nav.map((item) => (
+            <a href={item.href} aria-current={path.startsWith(item.href) ? 'page' : undefined}>{item.label}</a>
+          ))}
+          <a class="nav-social" href={SITE.socials.tiktok}>TikTok</a>
+          <a class="nav-social" href={SITE.socials.instagram}>Insta</a>
+          <span class="nav-lang"><span aria-current="true">{lang.toUpperCase()}</span> / <a href={switchHref} hreflang={otherLang} lang={otherLang}>{otherLang.toUpperCase()}</a></span>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="wrap footer-inner">
+        <div>
+          <p class="footer-big" set:html={t.footerBig} />
+          <p class="footer-note">{t.footerHand}</p>
+        </div>
+        <div class="footer-links">
+          <a class="social-pill" href={SITE.socials.tiktok}>TikTok</a>
+          <a class="social-pill" href={SITE.socials.instagram}>Instagram</a>
+          <a class="social-pill" href={SITE.socials.youtube}>YouTube</a>
+        </div>
+      </div>
+      <div class="wrap footer-legal">
+        <a href="/impressum/">{t.imprint}</a> · <a href="/datenschutz/">{t.privacy}</a> · <a href={switchHref} hreflang={otherLang}>{t.switchTo}</a> · © {new Date().getFullYear()} {SITE.author}
+      </div>
+    </footer>
+    <script>
+      // Videos erst nach Klick laden (Datenschutz), Code kopieren
+      document.querySelectorAll<HTMLElement>('.phone-screen[data-embed], .playlist-embed[data-embed]').forEach((el) => {
+        el.addEventListener('click', () => {
+          const iframe = document.createElement('iframe');
+          iframe.src = el.dataset.embed!;
+          iframe.allow = 'autoplay; encrypted-media; fullscreen';
+          iframe.loading = 'lazy';
+          iframe.title = 'Video';
+          el.replaceChildren(iframe);
+        }, { once: true });
+      });
+      document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((btn) => {
+        btn.addEventListener('click', async () => {
+          try { await navigator.clipboard.writeText(btn.dataset.copy!); btn.textContent = btn.dataset.copied!; } catch {}
+        });
+      });
+    </script>
+  </body>
+</html>

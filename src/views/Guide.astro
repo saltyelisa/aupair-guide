@@ -1,0 +1,146 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import BuyButton from '../components/BuyButton.astro';
+import { SITE } from '../config';
+import { UI, langFromPath } from '../i18n';
+
+const lang = langFromPath(Astro.url.pathname);
+const t = UI[lang]; void t;
+const C = {
+  de: {
+    title: 'Der Tahiti Guide',
+    description: 'Der Guide für Au-pair in Tahiti ohne Agentur: Familie finden, Vorlagen für Profil und Nachrichten, Vertrag, Kosten, Flüge, Versicherung und Leben vor Ort.',
+    kicker: 'Der Tahiti Guide',
+    h1: 'Au-pair auf Tahiti, <em>Schritt für Schritt</em>',
+    intro: 'Der Blog zeigt dir, dass es ohne Agentur geht. Im Guide zeige ich dir genau, wie, mit meinen echten Vorlagen, Gruppen und Zahlen. Alles zu Hawaii findest du übrigens gratis im Blog.',
+    insideKicker: 'Was drin ist',
+    insideTitle: 'Acht Kapitel, <em>null Agentur</em>',
+    features: [
+      ['', 'Die Suche starten', 'Wann du anfangen solltest, wie oft du suchen solltest und warum es keine Garantie gibt. Bei mir hat es von Mai bis Ende September gedauert.'],
+      ['', 'Plattformen und Gruppen', 'AuPair.com, AuPairWorld und die Facebook und WhatsApp Gruppen, in denen ich gesucht habe, mit allen Einstellungen, die man leicht übersieht, und einem Muster Facebook Post.'],
+      ['', 'Meine Vorlagen', 'Wie mein Profil aufgebaut war und was ich Familien geschrieben habe, zum Anpassen und Kopieren.'],
+      ['', 'Die richtige Familie', 'Was eine Familie dir bieten sollte, wie viel Arbeit normal ist und was nicht, und wie du ohne Agentur einen Au-pair Vertrag machst.'],
+      ['', 'Vor der Abreise', 'Visum und Einreise, Flüge und Verbindungen, Versicherung und Impfungen, SIM Tarife und eine Packliste mit allem, worauf du verzichten kannst.'],
+      ['', 'Was es wirklich kostet', 'Meine komplette Preisaufstellung, damit du weißt, mit welchen Ausgaben du rechnen musst.'],
+      ['', 'Leben auf Tahiti', 'Wie du Anschluss findest, wie gut dein Französisch sein muss, ein bisschen tahitianische Kultur und was du unbedingt gemacht haben solltest.'],
+      ['', 'Wenn es nicht passt', 'Meine Geschichte, wie ich die Familie gewechselt habe, und warum du nicht verzweifeln musst, wenn es anders kommt als geplant.'],
+    ],
+    formatTodo: 'Noch offen: Format (Online Guide, Notion, E-Book oder PDF) und ob Käufer dir bei Fragen persönlich schreiben können.',
+    compareTitle: 'Was gratis ist <em>und was im Guide steht</em>',
+    freeHead: 'Gratis auf der Website',
+    paidHead: 'Im Tahiti Guide',
+    compare: [
+      ['Warum ohne Agentur und warum Tahiti', 'Der genaue Ablauf, wann du anfangen und wie oft du suchen solltest'],
+      ['Dass es AuPair.com, AuPairWorld und Gruppen gibt', 'Die konkreten Gruppen, die richtigen Einstellungen und ein Muster Post'],
+      ['Tipps für die erste Nachricht', 'Mein echtes Profil und meine Nachrichten als Vorlage'],
+      ['Interaktive Karte von Französisch-Polynesien', 'Was eine Familie bieten sollte, Arbeitszeiten und Au-pair Vertrag'],
+      ['Reisezeit, Währung und Zeitverschiebung', 'Flüge, Versicherung, Impfungen, SIM, Packliste'],
+      ['Grobe Kosten', 'Meine komplette Preisaufstellung'],
+      ['Alles zu Volunteering auf Hawaii', 'Anschluss finden, Französisch, Kultur, Familienwechsel'],
+    ],
+    compareTodo: 'Vorschlag nach deiner Liste. Sag Bescheid, wenn etwas auf die andere Seite soll.',
+    faqKicker: 'Noch Fragen?',
+    faqTitle: 'Häufige Fragen',
+    q1: 'Für wen ist der Guide?',
+    a1: 'Für alle, die ohne Agentur als Au-pair nach Tahiti wollen und sich nicht alles mühsam selbst zusammensuchen möchten.',
+    q2: 'Wie bekomme ich den Guide nach dem Kauf?',
+    a2Todo: 'Hängt vom Format und der Plattform ab (zum Beispiel Download Link per Mail über Payhip).',
+    q3: 'Garantiert mir der Guide eine Familie?',
+    a3: 'Nein, und das wäre auch unehrlich. Es suchen mehr Au-pairs eine Familie auf Tahiti als es Familien gibt. Der Guide zeigt dir, wie du deine Chancen so gut wie möglich nutzt.',
+  },
+  en: {
+    title: 'The Tahiti Guide',
+    description: 'The guide to being an au pair in Tahiti without an agency: finding a family, templates for your profile and messages, contract, costs, flights, insurance and life there.',
+    kicker: 'The Tahiti Guide',
+    h1: 'Au pair in Tahiti, <em>step by step</em>',
+    intro: 'The blog shows you that it works without an agency. The guide shows you exactly how, with my real templates, groups and numbers. Everything about Hawaii is free on the blog, by the way.',
+    insideKicker: "What's inside",
+    insideTitle: 'Eight chapters, <em>zero agency</em>',
+    features: [
+      ['', 'Starting your search', "When to start, how often to search and why there's no guarantee. It took me from May until the end of September."],
+      ['', 'Platforms and groups', 'AuPair.com, AuPairWorld and the Facebook and WhatsApp groups where I searched, with the settings people easily miss, and a sample Facebook post.'],
+      ['', 'My templates', 'How my profile was set up and what I wrote to families, ready to adapt and copy.'],
+      ['', 'The right family', "What a family should offer you, how much work is normal and what isn't, and how to make an au pair contract without an agency."],
+      ['', 'Before you leave', 'Visa and entry, flights and connections, insurance and vaccinations, SIM plans and a packing list including what you can leave at home.'],
+      ['', 'What it really costs', 'My full cost breakdown, so you know what to budget for.'],
+      ['', 'Life in Tahiti', 'How to make friends, how good your French needs to be, a bit of Tahitian culture and what you absolutely have to do.'],
+      ['', "If it doesn't work out", "My story of switching families, and why you don't need to panic if things turn out differently than planned."],
+    ],
+    formatTodo: 'Still open: format (online guide, Notion, e-book or PDF) and whether buyers can message you personally with questions.',
+    compareTitle: 'What is free <em>and what is in the guide</em>',
+    freeHead: 'Free on the website',
+    paidHead: 'In the Tahiti guide',
+    compare: [
+      ['Why no agency and why Tahiti', 'The exact process, when to start and how often to search'],
+      ['That AuPair.com, AuPairWorld and groups exist', 'The specific groups, the right settings and a sample post'],
+      ['Tips for your first message', 'My real profile and messages as templates'],
+      ['Interactive map of French Polynesia', 'What a family should offer, working hours and au pair contract'],
+      ['Best time to go, currency and time difference', 'Flights, insurance, vaccinations, SIM, packing list'],
+      ['Rough costs', 'My full cost breakdown'],
+      ['Everything about volunteering in Hawaii', 'Making friends, French, culture, switching families'],
+    ],
+    compareTodo: 'Suggestion based on your list. Tell me if something should move to the other side.',
+    faqKicker: 'Any questions?',
+    faqTitle: 'FAQ',
+    q1: 'Who is the guide for?',
+    a1: "Anyone who wants to go to Tahiti as an au pair without an agency and doesn't want to piece everything together alone.",
+    q2: 'How do I get the guide after buying?',
+    a2Todo: 'Depends on the format and platform (for example a download link by email via Payhip).',
+    q3: 'Does the guide guarantee me a family?',
+    a3: "No, and claiming that would be dishonest. More au pairs are looking for a family in Tahiti than there are families. The guide shows you how to make the most of your chances.",
+  },
+}[lang];
+---
+<Base title={C.title} description={C.description}>
+  <PageHero kicker={C.kicker} title={C.h1}>
+    <p>{C.intro}</p>
+    <div class="actions">
+      <BuyButton />
+      <span class="price-tag">{SITE.price}</span>
+    </div>
+  </PageHero>
+
+  <section class="wrap section">
+    <p class="label">{C.insideKicker}</p>
+    <h2 class="section-title" set:html={C.insideTitle} />
+    <ol class="chapters">
+      {C.features.map(([, title, text], i) => (
+        <li>
+          <span class="destination-no">{String(i + 1).padStart(2, '0')}</span>
+          <h3>{title}</h3>
+          <p>{text}</p>
+        </li>
+      ))}
+    </ol>
+    <div class="todo">{C.formatTodo}</div>
+  </section>
+
+  <section class="wrap section">
+    <h2 class="section-title" set:html={C.compareTitle} />
+    <div class="compare" role="table">
+      <div class="compare-row compare-head" role="row">
+        <span role="columnheader">{C.freeHead}</span>
+        <span role="columnheader">{C.paidHead}</span>
+      </div>
+      {C.compare.map(([free, paid]) => (
+        <div class="compare-row" role="row">
+          <span role="cell">{free}</span>
+          <span role="cell">{paid}</span>
+        </div>
+      ))}
+    </div>
+    <div class="todo">{C.compareTodo}</div>
+  </section>
+
+  <section class="wrap section">
+    <p class="label">{C.faqKicker}</p>
+    <h2 class="section-title">{C.faqTitle}</h2>
+    <div class="faq">
+    <details class="faq-item"><summary><span>{C.q1}</span><svg class="faq-icon chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" /></svg></summary><div class="faq-answer"><p>{C.a1}</p></div></details>
+    <details class="faq-item"><summary><span>{C.q2}</span><svg class="faq-icon chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" /></svg></summary><div class="faq-answer"><div class="todo">{C.a2Todo}</div></div></details>
+    <details class="faq-item"><summary><span>{C.q3}</span><svg class="faq-icon chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" /></svg></summary><div class="faq-answer"><p>{C.a3}</p></div></details>
+    </div>
+    <div class="actions"><BuyButton /></div>
+  </section>
+</Base>

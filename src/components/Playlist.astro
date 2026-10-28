@@ -1,0 +1,26 @@
+---
+// Spotify Playlist, die aus Datenschutzgründen erst nach einem Klick geladen wird.
+import { SPOTIFY_PLAYLIST } from '../config';
+import { langFromPath } from '../i18n';
+const lang = langFromPath(Astro.url.pathname);
+const id = SPOTIFY_PLAYLIST.match(/playlist\/([A-Za-z0-9]+)/)?.[1];
+const C = {
+  de: { title: 'Mein Soundtrack für den Pazifik', text: 'Die Playlist, die mich durch Tahiti und Hawaii begleitet hat. Zum Träumen oder Kofferpacken.', load: 'Playlist laden', note: 'Beim Laden werden Inhalte von Spotify geladen.', todo: 'Link zu deiner Spotify Playlist in src/config.ts bei SPOTIFY_PLAYLIST eintragen.' },
+  en: { title: 'My Pacific soundtrack', text: 'The playlist that came with me through Tahiti and Hawaii. For daydreaming or packing.', load: 'Load playlist', note: 'Loading pulls content from Spotify.', todo: 'Add your Spotify playlist link in src/config.ts at SPOTIFY_PLAYLIST.' },
+}[lang];
+---
+<div class="playlist">
+  <div>
+    <p class="label">Spotify</p>
+    <h3>{C.title}</h3>
+    <p>{C.text}</p>
+  </div>
+  {id ? (
+    <div class="playlist-embed" data-embed={`https://open.spotify.com/embed/playlist/${id}`}>
+      <button class="btn btn-outline" type="button">{C.load}</button>
+      <small>{C.note}</small>
+    </div>
+  ) : (
+    <div class="todo">{C.todo}</div>
+  )}
+</div>

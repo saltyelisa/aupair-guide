@@ -1,0 +1,25 @@
+---
+import { UI, langFromPath } from '../i18n';
+interface Props { limit?: number }
+const { limit } = Astro.props;
+const lang = langFromPath(Astro.url.pathname);
+const t = UI[lang];
+const all = { de: import.meta.glob('../pages/blog/*.md', { eager: true }), en: import.meta.glob('../pages/en/blog/*.md', { eager: true }) };
+const modules = Object.values(all[lang]) as any[];
+const posts = modules
+  .map((m) => ({ ...m.frontmatter, url: m.url }))
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  .slice(0, limit);
+---
+<ol class="post-list">
+  {posts.map((post) => (
+    <li>
+      <a href={post.url + '/'}>
+        <span class="label">{post.tag}</span>
+        <span class="post-list-title">{post.title}</span>
+        <span class="post-list-desc">{post.description}</span>
+        <span class="post-list-more">{t.readMore}</span>
+      </a>
+    </li>
+  ))}
+</ol>

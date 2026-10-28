@@ -1,0 +1,31 @@
+---
+// Podcast Folge (Spotify oder Apple Podcasts), wird aus Datenschutzgründen erst nach einem Klick geladen.
+import { PODCAST_EPISODE } from '../config';
+import { langFromPath } from '../i18n';
+const lang = langFromPath(Astro.url.pathname);
+const spotifyId = PODCAST_EPISODE.match(/spotify\.com\/episode\/([A-Za-z0-9]+)/)?.[1];
+const src = spotifyId
+  ? `https://open.spotify.com/embed/episode/${spotifyId}`
+  : PODCAST_EPISODE.includes('podcasts.apple.com')
+    ? PODCAST_EPISODE.replace('podcasts.apple.com', 'embed.podcasts.apple.com')
+    : '';
+const C = {
+  de: { label: 'Podcast', title: 'Lieber <em>zuhören?</em>', text: 'Bei Wayfinders habe ich über mein Gap Year im Pazifik erzählt. Perfekt, um auf den Geschmack zu kommen.', load: 'Folge laden', note: 'Beim Laden werden Inhalte vom Podcast Anbieter geladen.', todo: 'Link zu deiner Wayfinders Folge in src/config.ts bei PODCAST_EPISODE eintragen, und ein, zwei Sätze, worum es in der Folge geht.' },
+  en: { label: 'Podcast', title: 'Rather <em>listen?</em>', text: 'I talked about my gap year in the Pacific on Wayfinders. A good way to get a taste of it.', load: 'Load episode', note: 'Loading pulls content from the podcast provider.', todo: 'Add your Wayfinders episode link in src/config.ts at PODCAST_EPISODE, plus a sentence on what the episode covers.' },
+}[lang];
+---
+<section class="wrap section podcast">
+  <div>
+    <p class="label">{C.label} · Wayfinders</p>
+    <h2 class="section-title" set:html={C.title} />
+    <p class="lead-dark">{C.text}</p>
+  </div>
+  {src ? (
+    <div class="playlist-embed podcast-embed" data-embed={src}>
+      <button class="btn" type="button">{C.load}</button>
+      <small>{C.note}</small>
+    </div>
+  ) : (
+    <div class="todo">{C.todo}</div>
+  )}
+</section>

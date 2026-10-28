@@ -1,0 +1,12 @@
+---
+import { langFromPath } from '../i18n';
+const items = {
+  de: ['Gastfamilie finden', 'Visum und Einreise', 'Versicherung', 'Worldpackers', 'Kosten', 'Vorlagen für Nachrichten', 'Leute kennenlernen', 'Plan B'],
+  en: ['Find a host family', 'Visa and entry', 'Insurance', 'Worldpackers', 'Costs', 'Message templates', 'Meet people', 'Plan B'],
+}[langFromPath(Astro.url.pathname)];
+---
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    {[...items, ...items].map((item) => <span>{item}<i>·</i></span>)}
+  </div>
+</div>
